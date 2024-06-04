@@ -12,7 +12,7 @@ class DaysHours(Base):
     time_end = Column(Time, nullable=True)
     date = Column(Date, nullable=True)
     routine_id = Column(Integer, ForeignKey("Routine.id"), nullable=True)
-    state = Column(Boolean)
+    state = Column(Boolean, default=False)
     
     day = relationship("Day", back_populates="daysHours")
     schedule = relationship("Schedule", back_populates="daysHours")

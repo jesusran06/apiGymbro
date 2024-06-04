@@ -15,12 +15,11 @@ async def createSchedule(db: Session, schedule: ScheduleCreate):
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Error al crear horario")
     
 
-async def getScheduleById(db: Session, id: int):
+async def getConfigSchedule(db: Session, id: int):
     query = text(
             """
             SELECT
                 schedule_id,
-                schedule_description,
                 day_id,
                 day_name,
                 day_time_init,
@@ -32,7 +31,8 @@ async def getScheduleById(db: Session, id: int):
                 schedule_id = :id
             """
         )
-    result = db.execute(query, {"id": id})
+    result = db.execute(query, {"id": id}).mappings().all()
+    
     db_schedule = [viewConfigSchedule(**row) for row in result]
     if db_schedule is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Schedule not found")

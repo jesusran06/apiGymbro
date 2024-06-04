@@ -10,4 +10,4 @@ class Training(Base):
     schedule_id = Column(Integer, ForeignKey("Schedule.id"), nullable=True)
     
     planTraining = relationship("PlanTraining", back_populates="training")
-    schedule = relationship("Schedule", back_populates="training")
+    scheduleTraining = relationship("ScheduleTraining", back_populates="training")

@@ -18,7 +18,7 @@ async def updateDaysHours(db: Session, dayhour: dict, id: int):
     try:
         db_dayHour = db.query(DaysHoursModel).filter(DaysHoursModel.schedule_id == dayhour["schedule_id"]).filter(DaysHoursModel.day_id == id).first()
         if db_dayHour is None:
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No se encontro el dia y hora")
+            return
         else:
             db_dayHour.time_init = dayhour["time_init"]
             db_dayHour.time_end = dayhour["time_end"]

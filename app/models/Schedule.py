@@ -11,6 +11,6 @@ class Schedule(Base):
     user_id = Column(Integer, ForeignKey("User.id"), nullable=True)
     
     user = relationship("User", back_populates="schedule")
-    training = relationship("Training", back_populates="schedule")
+    scheduleTraining = relationship("ScheduleTraining", back_populates="schedule")
     daysHours = relationship("DaysHours", back_populates="schedule")
     configuration = relationship("Configuration", back_populates="schedule")

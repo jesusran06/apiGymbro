@@ -26,8 +26,9 @@ async def createConfiguration(data : ConfigurationCreate, db: Session = Depends(
             bodyDay = {
                 "day_id" : day["id"],
                 "schedule_id": res_schedule.id,
-                "time_init" : day["start"],
-                "time_end" : day["end"]
+                "time_init" : day["start"] if day.get("start") else None,
+                "time_end" : day["end"] if day.get("end") else None,
+                "state" : day["state"]
             }
             await createDaysHours(db, bodyDay)
         return {"config": res_config, "status": 200}

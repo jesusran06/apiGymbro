@@ -26,6 +26,7 @@ import app.models.HistoryAsist
 import app.models.PlanTraining
 import app.models.HistoryAction
 import app.models.Configuration
+import app.models.ScheduleTraining
 from fastapi.middleware.cors import CORSMiddleware
 
 Base.metadata.create_all(bind=engine)

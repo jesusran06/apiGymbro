@@ -7,7 +7,7 @@ from app.utils.Security import hash
 from sqlalchemy.orm import Session
 from app.config.auth import create_token, authenticated_user
 from app.services.configuration import getConfig
-from app.services.schedule import getScheduleById
+from app.services.schedule import getConfigSchedule
 
 auth = APIRouter()
 
@@ -25,8 +25,8 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = 
     if not config:
         return {"access_token": access_token_jwt, "user":user, "token_type": "bearer", "config": None, "schedule": None}
     else:
-      schedule = await getScheduleById(db, config.schedule_id)
-      return {"access_token": access_token_jwt, "user":user, "token_type": "bearer", "config": config, "schedule": schedule}
+        schedule = await getConfigSchedule(db, config.schedule_id)
+        return {"access_token": access_token_jwt, "user":user, "token_type": "bearer", "config": config, "schedule": schedule}
 
 @auth.get("/")
 async def root():

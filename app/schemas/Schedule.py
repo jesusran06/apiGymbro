@@ -24,13 +24,11 @@ class Schedule(ScheduleBase):
 
 class viewConfigSchedule(BaseModel):
     schedule_id: int
-    schedule_description: str
-    # schedule_type: str
     day_id: int
     day_name: str
     day_time_init: Optional[time]
     day_time_end: Optional[time]
-    state: bool
+    state: Optional[bool]
 
     class Config:
         from_attributes = True
